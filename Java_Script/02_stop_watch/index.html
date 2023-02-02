@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="stopWatch">
+      <div id="fixedScreen">
+        <h1>STOP WATCH</h1>
+        <div class="timer">
+          <span id="HH">00</span>:<span id="MM">00</span>:<span id="SS"
+            >00</span
+          >
+        </div>
+        <br />
+        <div id="buttons">
+          <button id="start">Start</button>
+          <button id="pause" disabled>Pause</button>
+          <button id="stop" disabled>Stop</button>
+          <button id="lap" disabled>Lap🚩</button>
+        </div>
+      </div>
+      <div id="lapRec">
+        <ol id="lapRecord"></ol>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
