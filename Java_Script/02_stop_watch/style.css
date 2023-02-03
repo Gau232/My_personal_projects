@@ -1,6 +1,6 @@
 @font-face {
     font-family: digitalFont;
-    src: url("digital-7-mono.ttf") format("truetype");
+    src: url("digital-7-mono.ttf");
 }
 * {
     margin: 0;
