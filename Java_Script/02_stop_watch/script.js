@@ -9,9 +9,9 @@ const lapRec = document.getElementById('lapRecord');
 let hh = 0;
 let mm = 0;
 let ss = 0;
-let hhText = "";
-let mmText = "";
-let ssText = "";
+let hhText = "00";
+let mmText = "00";
+let ssText = "00";
 
 let interval = null;
 
