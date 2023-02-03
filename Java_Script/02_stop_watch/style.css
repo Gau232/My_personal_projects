@@ -33,7 +33,7 @@ body {
     position:sticky;
     top: 10px;
     background: black;
-    gap: 20px;
+    gap: 30px;
 }
 
 
@@ -48,7 +48,6 @@ h1 {
     text-align: center;
     border-radius: 10px;
     box-shadow: 0px 0px 5px rgb(136, 216, 136);
-
 }
 
 h1:hover {
