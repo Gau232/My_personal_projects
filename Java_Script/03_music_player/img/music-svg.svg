@@ -1,0 +1,21 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+	<title>music-svg</title>
+	<defs>
+		<image  width="24" height="24" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAADlQTFRFAAAAEW3vEmzuEW3vEW3vEmzuEW3vEmzuEW3vEmzuEW3vE2ztEW3vEW3vEW3vEW3vEmzuEW3vEmzuq1YvAwAAABN0Uk5TAMH+/9H6/u/Y/Zbmr+TV0vy98Bj3H0AAAABgSURBVHicvdBLDoAgDATQ0hHFH37uf1gFw2raxIVxNl28NEwR+SshOKDQLirQK0vLwJLKjBhJKsiE2ZEF/M76TKNbclvnzyTfF24WlNO5VPsYZ8Hc8BYq7BYcwGm2fZULy48Brbw8IjoAAAAASUVORK5CYII="/>
+		<image  width="19" height="23" id="img2" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAXCAMAAADeH4ToAAAAAXNSR0IB2cksfwAAAL1QTFRFAAAAIXfnT5XQu92cWpzLIHfoK3zifrW6os2ocq3ARI3WW53L0+2QyOWWi72zcq2/dq++V5vNLn/gf7W5H3boLH7ha6jCO4LMr9WiHHTpZ5++MmvOHG3cZo7GIHboVXzKjb+yHHTpTJPRbanCGXDmOoXTaqa7Gm3dOX2+caO/HWvdGW7iVYzAe667dKDAH2rdbaS8VnvKOn/EXIHJaZ6+TnbLe6+7eKi+aJbDfK67NGrQHGzeXYrGW4LJKWjUKGIULgAAAD90Uk5TAMX+//7U+////v7+////////8//a+//+/57/9sH/5v7/2/7/2v7/3/7/4dv////g//7+///+//////3O///4pAev2QAAAIpJREFUeJxjYKAAMDJiijExs7CysbBzcHIhCXLz8PDw8vHzCwgKIQsKi4BoUTFxJEEJsBiDpJQ0pqCMLLKZEnJgWh7Zdm4FRUwnKSmrYAqqqqljCmpoaqELaevo6umjiRkICwsbogoZAYWEjVHFTEBipqhiZkAhczTjLISFLa3QxKxtbO0w3YcfAAD0cwmZ2fPWJgAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: #000000 } 
+		.s1 { fill: none } 
+	</style>
+	<g id="SVGRepo_bgCarrier">
+	</g>
+	<g id="SVGRepo_tracerCarrier">
+	</g>
+	<g id="SVGRepo_iconCarrier">
+		<path id="Layer" class="s0" d="m13.6 5.5q1.3 0.2 2.5 0.9 1.1 0.7 1.9 1.8 0.8 1.1 1.1 2.3l-0.5 0.2q-0.2-0.7-0.7-1.4-0.4-0.6-1-1.1-0.5-0.5-1.2-0.9-0.7-0.4-1.4-0.6-0.4-0.1-0.8-0.1-0.4-0.1-0.8-0.1-0.4 0-0.7 0.1-0.4 0-0.8 0.1-0.3 0.1-0.6 0.2-0.2 0.1-0.5 0.2-0.2 0.2-0.5 0.3-0.2 0.2-0.4 0.4l7.9 7.9c0.8 1 0.6 2.9-0.5 4.4-1.2 1.5-3 2-3.9 1.1-1-1-0.8-3 0.4-4.6q0.2-0.2 0.4-0.5 0.2-0.2 0.5-0.4 0.3-0.2 0.6-0.3 0.2-0.2 0.6-0.2l-9.9-9.9 0.7-0.7 0.4 0.3q0.3 0.4 0.8 0.6 0.4 0.3 1 0.4 0.5 0.1 1 0 0.5 0 1-0.2 0.1 0 0.2-0.1 0.1 0 0.2 0 0.1 0 0.2-0.1 0.1 0 0.2 0 1.3-0.3 2.6 0z"/>
+		<use id="Layer 1" href="#img1" x="0" y="0"/>
+		<use id="Layer 1 copy" href="#img2" x="5" y="1"/>
+		<path id="Layer" class="s1" d="m-5 12l17-17 17 17-17 17z"/>
+	</g>
+</svg>
