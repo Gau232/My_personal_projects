@@ -114,11 +114,11 @@ async function getTopTrackItems(artist, artId) {
 
         // to HTML 
         newElement = (`${newElement}<li class="card" onclick="getId(this)" id="${uniqueTrackId}">
-        <!-- <a href="/img/ac3.jpg" class="card_image_link"> -->
-        <!-- <audio src="/music/test_music.mp3" id="audio"> -->
+        <!-- <a href="./img/ac3.jpg" class="card_image_link"> -->
+        <!-- <audio src="./music/test_music.mp3" id="audio"> -->
           <img
             class="card_image"
-            src="${albumImg}" onerror="this.src='/img/ac3.jpg';this.onerror='';" 
+            src="${albumImg}" onerror="this.src='./img/ac3.jpg';this.onerror='';" 
             alt="album cover pic"
           />
         <!-- </a> -->
@@ -141,7 +141,7 @@ console.log(songsArray);
 
 // 3. selecting the song - start
 let currSongId = "";
-let currSong = "/music/test_music.mp3";
+let currSong = "./music/test_music.mp3";
 let currSongIndex = null;
 let music = new Audio();
 music.src = currSong;
