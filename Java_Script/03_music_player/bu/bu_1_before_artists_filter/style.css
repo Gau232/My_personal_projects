@@ -1,6 +1,5 @@
 :root {
     --primaryColor: #3a7fd8;
-    /* --primaryColor: #ff0000; */
     --secondaryColor: #ffffff;
     --bgColor: #000000;
     --testColor1: #ff0000;
@@ -18,15 +17,14 @@
 
 body {
     width: 100%;
-    /* min-height: 300vh; */
+    height: 200vh;
     background-color: var(--bgColor);
     font-family: Poppins;
     color: rgb(206, 202, 202);
-    padding-bottom: 20vh;
 }
 
 .custom-cur {
-    cursor: url('./img/music-cursor.svg'), auto;
+    cursor: url('./img/music-svg.svg'), auto;
   }
 
 .nav, .mid_section {
@@ -262,7 +260,6 @@ nav {
 #controls #play_button:hover {
     box-shadow: inset 0 0 8px var(--primaryColor), 0 0 8px var(--primaryColor);
     transition: 0.2s;
-    animation-play-state: paused;
 }
 
 .control_bottons {
@@ -443,107 +440,17 @@ nav {
 /** body song section **/
 
 .mid_section {
-    padding-top: 70px;
-    width: 80%;
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 30px;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.artists_section, .album_section, .tracks_section {
-    width: 100%;
-}
-
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-}
-
-.section-heading >h3, .section-heading >h3>span {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    color: var(--secondaryColor);
-}
-
-#artists-container, #albums-container, #tracks-container{
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-}
-#tracks-container{
-    flex-wrap: wrap;
-    align-items: center;
-}
-#artists-container::-webkit-scrollbar, #albums-container::-webkit-scrollbar, #tracks-container::-webkit-scrollbar{
-    display: none;
-}
-
-#artist_count, #album_count, .track_count {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    width: 70px;
-}
-#album_count {
-    width: 90px;
-}
-.track_count {
-    width: 90px;
-}
-.artist_image {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 2px solid rgb(78, 75, 75);
-}
-.album_image {
-    width: 90px;
-    height: 90px;
-    border-radius: 8%;
-    border: 2px solid rgb(78, 75, 75);
-    }
-.track_image {
-    width: 90px;
-    height: 90px;
-    border-radius: 8%;
-    border: 2px solid rgb(78, 75, 75);
-}
-.artist_image:hover, .album_image:hover, .track_image:hover {
-    border: 3px solid var(--primaryColor);
-    /* transition: 0.2s; */
-    z-index: 7;
-}
-.artist_image:active, .album_image:active, .track_image:active {
-    border: 2px solid var(--primaryColor);
-    scale: 0.8;
-    /* transition: 0.2s; */
-}
-#artist_count:hover, #album_count:hover, .track_count:hover {
-    scale: 0.95;
-}
-
-#artist-name, #album-name, #track-name {
-    text-align: center;
-    font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--body_font_color);
-    font-weight: 200;
-}
-#album-name, #track-name {
-    text-align: left;
 }
 
 .mid_type_section {
     /* background: var(--testColor1);  delete */
-    width: 100%;
+    width: 85%;
     height: 150px;
 }
 
@@ -620,9 +527,9 @@ nav {
 }
 
 .arrow {
-    /* display: none; */
+    display: none;
     padding: 3px;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--primaryColor);
     /* border: 2px solid var(--primaryColor); */
     /* border-radius: 50%; */
@@ -719,21 +626,15 @@ color:white;
 
 .pl_items {
     position: relative;
-    /* display: flex; */
+    display: flex;
     /* justify-content: center; */
-    /* align-items: center; */
-    /* gap: 10px; */
+    align-items: center;
+    gap: 10px;
     /* display: list-item; */
 
     /* border: 1px solid var(--primaryColor); */
 }
-#plSongInfo {
-    display: flex;
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    align-items: center;
-    gap: 10px;
-}
+
 .pl_items:hover {
     opacity: 0.8;
     scale: 0.98;
@@ -752,7 +653,7 @@ color:white;
     border-radius: 50%;
 }
 
-#plHead {
+.pl_items h5 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -763,12 +664,12 @@ color:white;
     text-overflow: ellipsis;    
     width: 60%;
 }
-#plHead div{
+.pl_items h5 div{
     opacity: 0.7;
 }
 
 @media screen and (max-width: 650px){
-    #plHead {
+    .pl_items h5 {
         font-size: 0.8rem;
     }
 }
@@ -779,7 +680,6 @@ color:white;
     top: 25%;
     right: 4%;
     transition: 0.1s;
-    z-index: 99999;
 }
 
 .pl_icons:hover {
@@ -831,7 +731,7 @@ color:white;
 @keyframes flashColor {
     0% {text-shadow: 0px 0px 20px orange;}
     50% {text-shadow: 0px 0px 20px white;
-    color: var(--primaryColor);}
+    color: hsl(200, 100%, 50%,0.8);}
     100% {text-shadow: 0px 0px 20px orange;}
     0% {scale: 1.0;}
     50% {scale: 0.9;}

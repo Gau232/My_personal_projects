@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="./img/logo_1.png" />
+    <link rel="icon" href="./img/logo_1.png" type="image/x-icon" />
     <title>Yazhisai</title>
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,7 +25,7 @@
     <header>
       <nav class="nav">
         <a href="/" class="logo">
-          <img id="logo" src="./img/logo_1.png" alt="logo"
+          <img id="logo" class="hue_rotate" src="./img/logo_1.png" alt="logo"
         /></a>
         <ul class="nav_list">
           <li><a href="#">Home</a></li>
@@ -48,86 +48,193 @@
     </header>
 
     <section class="mid_section">
-      <div class="mid_type_section">
-        <section class="row_main">
-          <div class="row_heading">
-            <h2 class="heading_name">Taylor Swift</h2>
-            <!--<div class="arrows">
-              <i class="fa-solid fa-arrow-left arrow"></i>
-              <i class="fa-solid fa-arrow-right arrow"></i>
-            </div> 
--->
+      <div class="artists_section">
+        <div class="section-heading">
+          <h3>Top Artists</h3>
+          <div class="arrows">
+            <i
+              class="fa-solid fa-arrow-left arrow"
+              onclick="artLeftArrow()"
+            ></i>
+            <i
+              class="fa-solid fa-arrow-right arrow"
+              onclick="artRightArrow()"
+            ></i>
           </div>
-          <div class="row_container">
-            <ul class="card_container taylor"></ul>
+        </div>
+        <div id="artists-container">
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
           </div>
-        </section>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+          <div id="artist_count">
+            <img class="artist_image" src="./img/artist-default.png" />
+            <h2 id="artist-name">Artist Name</h2>
+          </div>
+        </div>
       </div>
 
-      <div class="mid_type_section">
-        <section class="row_main">
-          <div class="row_heading">
-            <h2 class="heading_name">Lady Gaga</h2>
-            <!--<div class="arrows">
-              <i class="fa-solid fa-arrow-left arrow"></i>
-              <i class="fa-solid fa-arrow-right arrow"></i>
-            </div> 
--->
+      <div class="album_section">
+        <div class="section-heading">
+          <h3>Top <span id="album_title_name"></span>Albums</h3>
+          <div class="arrows">
+            <i
+              class="fa-solid fa-arrow-left arrow"
+              onclick="albLeftArrow()"
+            ></i>
+            <i
+              class="fa-solid fa-arrow-right arrow"
+              onclick="albRightArrow()"
+            ></i>
           </div>
-          <div class="row_container">
-            <ul class="card_container lady_gaga"></ul>
+        </div>
+        <div id="albums-container">
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
           </div>
-        </section>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+          <div id="album_count">
+            <img class="album_image" src="./img/album-default.png" />
+            <h2 id="album-name">Album Name</h2>
+          </div>
+        </div>
       </div>
 
-      <div class="mid_type_section">
-        <section class="row_main">
-          <div class="row_heading">
-            <h2 class="heading_name">One Republic</h2>
-            <!--<div class="arrows">
-              <i class="fa-solid fa-arrow-left arrow"></i>
-              <i class="fa-solid fa-arrow-right arrow"></i>
-            </div> 
--->
+      <div class="tracks_section">
+        <div class="section-heading">
+          <h3><span id="track_title_name">Top </span>Tracks</h3>
+        </div>
+        <div id="tracks-container">
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
           </div>
-          <div class="row_container">
-            <ul class="card_container one_republic"></ul>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
           </div>
-        </section>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+          <div id="track_count">
+            <img class="track_image" src="./img/track-default.jpg" />
+            <h2 id="track-name">Track Name</h2>
+          </div>
+        </div>
       </div>
-
-      <div class="mid_type_section">
-        <section class="row_main">
-          <div class="row_heading">
-            <h2 class="heading_name">Rihanna</h2>
-            <!--<div class="arrows">
-              <i class="fa-solid fa-arrow-left arrow"></i>
-              <i class="fa-solid fa-arrow-right arrow"></i>
-            </div> 
--->
-          </div>
-          <div class="row_container">
-            <ul class="card_container rihanna"></ul>
-          </div>
-        </section>
-      </div>
-
-      <div class="mid_type_section">
-        <section class="row_main">
-          <div class="row_heading">
-            <h2 class="heading_name">Adele</h2>
-            <!--<div class="arrows">
-              <i class="fa-solid fa-arrow-left arrow"></i>
-              <i class="fa-solid fa-arrow-right arrow"></i>
-            </div> 
--->
-          </div>
-          <div class="row_container">
-            <ul class="card_container adele"></ul>
-          </div>
-        </section>
-      </div>
-
       <!-- ref -->
     </section>
 
@@ -137,18 +244,7 @@
       <div id="playlist">
         <h2>Playlist</h2>
         <div class="pl_section">
-          <ul id="plOderedList">
-            <!-- <li class="pl_items">
-              <img id="pl_album_image" src="./img/na.png" alt="album image" />
-              <h5>
-                Song Name
-                <div>Sub Title</div>
-              </h5>
-              <div class="pl_icon_container">
-                <i class="fa-solid fa-circle-xmark pl_icons"></i>
-              </div>
-            </li> -->
-          </ul>
+          <ul id="plOderedList"></ul>
         </div>
       </div>
     </section>
@@ -160,8 +256,8 @@
         <div id="player_left_section">
           <img id="album_cover" src="./img/na.png" alt="album cover" />
           <div id="song_info">
-            <div id="song_name">Song of Love</div>
-            <div id="sub_title">Unknown</div>
+            <div id="song_name">Flute of Love</div>
+            <div id="sub_title">My Ringtone</div>
           </div>
         </div>
 

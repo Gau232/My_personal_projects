@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./img/logo_1.png" type="image/x-icon" />
+    <title>Yazhisai</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <script
+      src="https://kit.fontawesome.com/2fe2a0f171.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body class="custom-cur">
+    <header>
+      <nav class="nav">
+        <a href="/" class="logo">
+          <img id="logo" class="hue_rotate" src="./img/logo_1.png" alt="logo"
+        /></a>
+        <ul class="nav_list">
+          <li><a href="#">Home</a></li>
+          <li>
+            <span class="search_bar">
+              <i id="search_icon" class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                name="search"
+                id="search_song"
+                placeholder="Search Songs"
+              />
+            </span>
+          </li>
+          <li>
+            <a id="playlist_button" onclick="openPlayList()">Playlist</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="mid_section">
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Taylor Swift</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container taylor"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Lady Gaga</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container lady_gaga"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">One Republic</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container one_republic"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Rihanna</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container rihanna"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Adele</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container adele"></ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- ref -->
+    </section>
+
+    <!-- playlist section -->
+    <section id="playlist_section">
+      <div id="inactive_section" onclick="backToMain()"></div>
+      <div id="playlist">
+        <h2>Playlist</h2>
+        <div class="pl_section">
+          <ul id="plOderedList">
+            <!-- <li class="pl_items">
+              <img id="pl_album_image" src="./img/na.png" alt="album image" />
+              <h5>
+                Song Name
+                <div>Sub Title</div>
+              </h5>
+              <div class="pl_icon_container">
+                <i class="fa-solid fa-circle-xmark pl_icons"></i>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- playlist section end-->
+
+    <footer>
+      <div class="player_section">
+        <div id="player_left_section">
+          <img id="album_cover" src="./img/na.png" alt="album cover" />
+          <div id="song_info">
+            <div id="song_name">Song of Love</div>
+            <div id="sub_title">Unknown</div>
+          </div>
+        </div>
+
+        <div id="player_mid_section">
+          <div id="controls">
+            <i
+              class="fa-solid fa-backward control_bottons control_bottons_css2"
+              onclick="tsecsback()"
+            ></i>
+            <i
+              class="fa-solid fa-backward-step control_bottons control_bottons_css2"
+              onclick="playPrevSong()"
+            ></i>
+            <i
+              id="play_button"
+              class="fa-solid fa-play control_bottons"
+              onclick="play_pause()"
+            ></i>
+            <i
+              class="fa-solid fa-forward-step control_bottons control_bottons_css2"
+              onclick="playNextSong()"
+            ></i>
+            <i
+              class="fa-solid fa-forward control_bottons control_bottons_css2"
+              onclick="tsecsforward()"
+            ></i>
+          </div>
+
+          <div id="seek_section">
+            <span id="currentTime">0:00</span>
+            <div id="bar_section">
+              <input type="range" id="seek_bar" min="0" max="100" value="0" />
+              <div id="bar2"></div>
+              <div id="dot"></div>
+            </div>
+            <span id="endTime">0:00</span>
+          </div>
+        </div>
+
+        <div id="player_right_section">
+          <div>
+            <i
+              class="fa-solid fa-shuffle icon_size_1 control_bottons"
+              onclick="shuffle()"
+            ></i>
+            <i
+              id="addToPlaylist"
+              class="fa-regular fa-heart icon_size_1 control_bottons playlist_button"
+              onclick="add_remove_playlist()"
+            ></i>
+          </div>
+          <div>
+            <i class="vol_icon fa-solid fa-volume-high icon_size_1"></i>
+            <div id="vol_bar_section">
+              <input type="range" id="vol_bar" min="0" max="100" value="100" />
+              <div id="vol_bar2"></div>
+              <div id="vol_dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>

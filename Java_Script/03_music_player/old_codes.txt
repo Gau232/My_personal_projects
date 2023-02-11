@@ -1,0 +1,136 @@
+/****  HTML  ****/
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Taylor Swift</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container taylor"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Lady Gaga</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container lady_gaga"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">One Republic</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container one_republic"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Rihanna</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container rihanna"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="mid_type_section">
+        <section class="row_main">
+          <div class="row_heading">
+            <h2 class="heading_name">Adele</h2>
+            <!--<div class="arrows">
+              <i class="fa-solid fa-arrow-left arrow"></i>
+              <i class="fa-solid fa-arrow-right arrow"></i>
+            </div> 
+-->
+          </div>
+          <div class="row_container">
+            <ul class="card_container adele"></ul>
+          </div>
+        </section>
+      </div>
+
+
+/**** JS ****/
+
+// top tracks old
+async function getTopTrackItems(artist, artId) {
+    // /artists/Art.28463069/tracks/top?limit=10&
+    const topTrackAPI = await fetch(fetchLink("/artists/"+artId+"/tracks/top?limit=8&"));
+    const topTrackItems = await topTrackAPI.json();
+    let arrList = topTrackItems.tracks;
+    // console.log(arrList);
+
+    let newElement = "";
+    arrList.forEach(element => {
+        let uniqueTrackId = element.id;
+        let songName = element.name;
+        let artName = element.artistName;
+        let audioURL = element.previewURL;
+        let albumId = element.albumId;
+        let albumImg = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`
+        // console.log(songName +" , "+ audioURL +" , "+ trackId + " , "+ albumId+" , "+albumImg);
+
+
+        // songArray creation
+        songsArray.push({
+            id: uniqueTrackId,
+            songName: songName,
+            artistName: artName,
+            audioURL: audioURL,
+            albumImg: albumImg
+        });
+
+        // to HTML 
+        newElement = (`${newElement}<li class="card" onclick="getId(this)" id="${uniqueTrackId}">
+        <!-- <a href="./img/ac3.jpg" class="card_image_link"> -->
+        <!-- <audio src="./music/sample_music.mp3" id="audio"> -->
+          <img
+            class="card_image"
+            src="${albumImg}" onerror="this.src='./img/ac3.jpg';this.onerror='';" 
+            alt="album cover pic"
+          />
+        <!-- </a> -->
+        <div class="card_title">${songName}</div>
+      </li>`);
+    });
+    // return newElement;
+    artist.innerHTML = newElement;
+    
+}
+
+// getTopTrackItems(taylorPlayList,'art.10482910');
+// getTopTrackItems(ladyGagaPlayList,'art.20067373');
+// getTopTrackItems(oneRepublicPlayList,'art.9557788');
+// getTopTrackItems(rihannaPlayList,'art.7375005');
+// getTopTrackItems(adelePlayList,'art.20554979');

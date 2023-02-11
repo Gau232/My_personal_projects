@@ -1,52 +1,39 @@
 /* sections
 // golbal - start 
 // selectors
-// variables
-// funtions
+// variables:-
+// funtions:-
 // golbal - end
 // 1. Playlist open close on UI - start
 // 1. Playlist open close on UI - end
 // 2. bringing songs to cards / songArray creation- start
-// top artists
-        // create elements
-// top albums
-        // create elements
-// top and new tracks general
-        // create songArray
-        // create elements
-        // create songArray
-        // create elements
-// tracks for artist/album
-    // console.log(trackArray);
-        // create songArray
-        // create elements
-// selecting an artist
+        // songArray creation
+        // to HTML 
+    // return newElement;
 // 2. bringing songs to cards / songArray creation - end
 // 3. selecting the song - start
     //3.1 getting song details
     //3.2 updating player left section
     //3.3 updating the music variables
+    // music.pause();
     //3.4 playing the song
 // 3. selecting the song - end
 // 4. player controls - start
-// 4.1 playing the selected song 
-// 4.2 updating the time
-// 4.3 seek control
-// 4.4 if music ended
-// 4.5 volume controls
-// 4.6 next, previous, forward, backward buttons
-// 4.7 shuffle button
+	// 4.1 playing the selected song 
+	// 4.2 updating the time
+	// 4.3 seek control
+	// 4.4 if music ended
+	// 4.5 volume controls
+	// 4.6 next, previous, forward, backward buttons
+	// 4.7 shuffle button
 // 4. player controls - end
 // 5. Playlist - start
-// 5.1 Add to playlist
-// 5.2 Generate Playlists
-// 5.3 Playlist icon update
-// 5.4 playlist selections play
-// 5.5 remove from playlist
+	// 5.1 Add to playlist
+	// 5.2 Generate Playlists
+	// 5.3 Playlist icon update
+	// 5.4 playlist selections play
+	// 5.5 remove from playlist
 // 5. Playlist - end
-// 6. Other funtions:
-// 6.1  scroll functions
-
 */
 
 // golbal - start 
@@ -72,12 +59,6 @@ const playlistSection = document.querySelector('#plOderedList');
 const playListButton = document.querySelector('#addToPlaylist');
 const imageHue = document.querySelector('#logo');
 
-const artistsContainer = document.querySelector('#artists-container');
-const albumsContainer = document.querySelector('#albums-container');
-const tracksContainer = document.querySelector('#tracks-container');
-const albumTitleName = document.querySelector('#album_title_name');
-const trackTitleName = document.querySelector('#track_title_name');
-
 
 const taylorPlayList = document.querySelector(".taylor");
 const rihannaPlayList = document.querySelector(".rihanna");
@@ -89,7 +70,7 @@ const adelePlayList = document.querySelector(".adele");
 const baseUrl= "https://api.napster.com/v2.2";
 const callApiKey = "apikey=YWNkZDJkZjktN2Y0ZS00MTExLWI2MzAtNmE4ZDZlODI3MWRk";
 
-
+let songsArray = [];
 
 // funtions
 function fetchLink(midLink) {
@@ -119,192 +100,65 @@ function backToMain() {
 
 
 // 2. bringing songs to cards / songArray creation- start
-// top artists
-async function getArtists(){
-    let artistArray = [];
-    const artistsAPI = await fetch(fetchLink("/artists/top?"));
-    const artistItems = await artistsAPI.json();
-    artistArray = artistItems.artists;
-    // console.log(artistArray);
+
+// top tracks
+async function getTopTrackItems(artist, artId) {
+    // /artists/Art.28463069/tracks/top?limit=10&
+    const topTrackAPI = await fetch(fetchLink("/artists/"+artId+"/tracks/top?limit=8&"));
+    const topTrackItems = await topTrackAPI.json();
+    let arrList = topTrackItems.tracks;
+    // console.log(arrList);
 
     let newElement = "";
-    artistArray.forEach(artist => {
-        let artistId = artist.id;
-        let artistName = artist.name;        ;
-        let artistImage = `https://api.napster.com/imageserver/v2/artists/${artistId}/images/170x170.jpg`;
+    arrList.forEach(element => {
+        let uniqueTrackId = element.id;
+        let songName = element.name;
+        let artName = element.artistName;
+        let audioURL = element.previewURL;
+        let albumId = element.albumId;
+        let albumImg = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`
+        // console.log(songName +" , "+ audioURL +" , "+ trackId + " , "+ albumId+" , "+albumImg);
 
-        // create elements
-        newElement += (`<div id="artist_count" onclick="getArtistAlbumTracks(this)" data-artistId="${artistId}" data-artistName="${artistName}" data-type="artist">
-        <img class="artist_image" src="${artistImage}" onerror="this.src='./img/artist-default.png';this.onerror='';" />
-        <h2 id="artist-name">${artistName}</h2>
-      </div>`);
-    });
-    artistsContainer.innerHTML = newElement;
-}
-getArtists();
 
-// top albums
-async function getAlbums(e=""){
-    let albumArray = [];
-    let albumTitle = " ";
-    let albumsAPI = "";
-    if (e === "") {
-    albumsAPI = await fetch(fetchLink("/albums/top?"));
-    }
-    else {
-    albumsAPI = await fetch(fetchLink(`/artists/${e.getAttribute("data-artistId")}/albums/top?`));
-    albumTitle = e.getAttribute("data-artistName") + " ";
-    }
-    const albumItems = await albumsAPI.json();
-    albumArray = albumItems.albums;
-    // console.log(albumArray);
-
-    let newElement = "";
-    albumArray.forEach(album => {
-        let albumId = album.id;
-        let albumName = album.name;        ;
-        let albumImage = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`;
-
-        // create elements
-        newElement += (`<div id="album_count" onclick="getAlbumTracks(this)" data-albumId="${albumId}" data-albumName="${albumName}" data-type="album">
-        <img class="album_image" src="${albumImage}" onerror="this.src='./img/album-default.png';this.onerror='';" />
-        <h2 id="album-name">${albumName}</h2>
-      </div>`);
-    });
-    albumsContainer.innerHTML = newElement;
-    albumTitleName.innerHTML = albumTitle;
-}
-getAlbums();
-
-// top and new tracks general
-let songsArray = [];
-async function getTracksgeneral(){
-    let trackArray1 = [];
-    let trackArray2 = [];
-    songsArray = [];
-    const tracksAPI1 = await fetch(fetchLink(`/tracks/top?`));
-    const tracksAPI2 = await fetch(fetchLink(`/tracks/top?offset=20&`));
-    const trackItems1 = await tracksAPI1.json();
-    const trackItems2 = await tracksAPI2.json();
-    trackArray1 = trackItems1.tracks;
-    trackArray2 = trackItems2.tracks;
-    // console.log(trackArray1);
-    // console.log(trackArray2);
-
-    let newTrackElement = "";
-
-    trackArray1.forEach(track => {
-        let trackId = track.id;
-        let trackName = track.name;
-        let artistName = track.artistName;
-        let audioURL = track.previewURL;
-        let albumId = track.albumId;
-        let trackImage = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`;
-
-        // create songArray
+        // songArray creation
         songsArray.push({
-            id: trackId,
-            songName: trackName,
-            artistName: artistName,
+            id: uniqueTrackId,
+            songName: songName,
+            artistName: artName,
             audioURL: audioURL,
-            albumImg: trackImage
+            albumImg: albumImg
         });
 
-        // create elements
-        newTrackElement += (`<div class="track_count" onclick="getId(this)" id="${trackId}">
-        <img class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
-        <h2 id="track-name">${trackName}</h2>
-      </div>`);
+        // to HTML 
+        newElement = (`${newElement}<li class="card" onclick="getId(this)" id="${uniqueTrackId}">
+        <!-- <a href="./img/ac3.jpg" class="card_image_link"> -->
+        <!-- <audio src="./music/test_music.mp3" id="audio"> -->
+          <img
+            class="card_image"
+            src="${albumImg}" onerror="this.src='./img/ac3.jpg';this.onerror='';" 
+            alt="album cover pic"
+          />
+        <!-- </a> -->
+        <div class="card_title">${songName}</div>
+      </li>`);
     });
-
-    trackArray2.forEach(track => {
-        let trackId = track.id;
-        let trackName = track.name;
-        let artistName = track.artistName;
-        let audioURL = track.previewURL;
-        let albumId = track.albumId;
-        let trackImage = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`;
-
-        // create songArray
-        songsArray.push({
-            id: trackId,
-            songName: trackName,
-            artistName: artistName,
-            audioURL: audioURL,
-            albumImg: trackImage
-        });
-
-        // create elements
-        newTrackElement += (`<div class="track_count" onclick="getId(this)" id="${trackId}">
-        <img class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
-        <h2 id="track-name">${trackName}</h2>
-      </div>`);
-    });
-    tracksContainer.innerHTML = newTrackElement;
-}
-getTracksgeneral();
-
-// tracks for artist/album
-async function getTracks(e){
-    let trackArray = [];
-    songsArray = [];
-    let trackTitle = " ";
-    let tracksAPI = "";
-    if (e.getAttribute("data-type") === "artist") {
-        tracksAPI = await fetch(fetchLink(`/artists/${e.getAttribute("data-artistId")}/tracks/top?`));
-        trackTitle = "Top " + e.getAttribute("data-artistName") + " ";
-    }
-    else {
-        tracksAPI = await fetch(fetchLink(`/albums/${e.getAttribute("data-albumId")}/tracks?`));
-        trackTitle = e.getAttribute("data-albumName") + " ";
-    }
-    const trackItems = await tracksAPI.json();
-    trackArray = trackItems.tracks;
-    // console.log(trackArray);
+    // return newElement;
+    artist.innerHTML = newElement;
     
-    let newTrackElement = "";
-    trackArray.forEach(track => {
-        let trackId = track.id;
-        let trackName = track.name;
-        let artistName = track.artistName;
-        let audioURL = track.previewURL;
-        let albumId = track.albumId;
-        let trackImage = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`;
-
-        // create songArray
-        songsArray.push({
-            id: trackId,
-            songName: trackName,
-            artistName: artistName,
-            audioURL: audioURL,
-            albumImg: trackImage
-        });
-
-        // create elements
-        newTrackElement += (`<div class="track_count" onclick="getId(this)" id="${trackId}">
-        <img class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
-        <h2 id="track-name">${trackName}</h2>
-      </div>`);
-    });
-    tracksContainer.innerHTML = newTrackElement;
-    trackTitleName.innerHTML = trackTitle;
 }
 
-// selecting an artist
-function getArtistAlbumTracks(e) {
-    getAlbums(e);
-    getTracks(e);
-}
-function getAlbumTracks(e) {
-    getTracks(e);
-}
+getTopTrackItems(taylorPlayList,'art.10482910');
+getTopTrackItems(ladyGagaPlayList,'art.20067373');
+getTopTrackItems(oneRepublicPlayList,'art.9557788');
+getTopTrackItems(rihannaPlayList,'art.7375005');
+getTopTrackItems(adelePlayList,'art.20554979');
 
 console.log(songsArray);
 // 2. bringing songs to cards / songArray creation - end
 
 // 3. selecting the song - start
 let currSongId = "";
-let currSong = "./music/sample_music.mp3";
+let currSong = "/music/test_music.mp3";
 let currSongIndex = null;
 let music = new Audio();
 music.src = currSong;
@@ -314,9 +168,9 @@ function getId(e) {
     currSongId = e.id;
     //3.1 getting song details
     let selectedSongObj = songsArray.find(item => item.id === currSongId);
-    // console.log("The song is :");
-    // console.log(selectedSongObj);
-    // console.log(`Song Index is: ${songsArray.indexOf(selectedSongObj)}`);
+    console.log("The song is :");
+    console.log(selectedSongObj);
+    console.log(`Song Index is: ${songsArray.indexOf(selectedSongObj)}`);
 
 
     //3.2 updating player left section
@@ -393,11 +247,7 @@ music.addEventListener('ended', () => {
     playerAlbumCover.style.height='100%';
 });
 
-
 // 4.5 volume controls
-music.volume = 0.2;
-volBar2.style.width = '20%';
-volBarDot.style.left = '20%';
 volIcon.addEventListener('click', () => {
     if (music.volume >0 ) {
         music.volume = 0;
@@ -407,7 +257,7 @@ volIcon.addEventListener('click', () => {
         volBarDot.style.left = 0;
     }
     else {
-        music.volume = 0.5;
+        music.volume = 1;
         volIcon.classList.add('fa-volume-high');
         volIcon.classList.remove('fa-volume-xmark');
         volBar2.style.width = '50%';
@@ -466,14 +316,12 @@ function generatePlayList() {
     for (let i=0; i<localStorage.length; i++ ) {
         const key = localStorage.key(i);
         const value = JSON.parse(localStorage.getItem(key));
-        newPlElement += (`<li class="pl_items">
-        <div id="plSongInfo" onclick="playListItem(this)" data-songid="${value.id}" data-songurl="${value.audioURL}" data-albImg="${value.albumImg}" data-sngName="${value.songName}" data-artName="${value.artistName}">
-            <img id="pl_album_image" src="${value.albumImg}" alt="album image" />
-            <h5 id="plHead">
-            ${value.songName}
-            <div>${value.artistName}</div>
-            </h5>
-        </div>
+        newPlElement += (`<li class="pl_items" onclick="playListItem(this)" data-songid="${value.id}" data-songurl="${value.audioURL}" data-albImg="${value.albumImg}" data-sngName="${value.songName}" data-artName="${value.artistName}">
+        <img id="pl_album_image" src="${value.albumImg}" alt="album image" />
+        <h5>
+          ${value.songName}
+          <div>${value.artistName}</div>
+        </h5>
         <div class="pl_icon_container">
           <i class="fa-solid fa-circle-xmark pl_icons" onclick="removeFromPlaylist(this)" data-songid="${value.id}"></i>
         </div>
@@ -517,18 +365,5 @@ function removeFromPlaylist(e) {
 
 // 5. Playlist - end
 
-
-// 6. Other funtions:
-// 6.1  scroll functions
-function artLeftArrow() {
-    document.querySelector(`#artists-container`).scrollLeft -= 500;
-}
-function artRightArrow() {
-    document.querySelector(`#artists-container`).scrollLeft += 500;
-}
-function albLeftArrow() {
-    document.querySelector(`#albums-container`).scrollLeft -= 500;
-}
-function albRightArrow() {
-    document.querySelector(`#albums-container`).scrollLeft += 500;
-}
+// tests TODO:
+// document.documentElement.style.setProperty('--bgColor', 'red');

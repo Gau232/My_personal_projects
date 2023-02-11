@@ -1,0 +1,59 @@
+/*  // api
+
+const callApiKey = "?apikey=YWNkZDJkZjktN2Y0ZS00MTExLWI2MzAtNmE4ZDZlODI3MWRk";
+const baseUrl= "https://api.napster.com/v2.2";
+
+const midLink = "/playlists"
+
+// const fetchLink = baseUrl + "/playlists&lang=en-US" + callApiKey;
+const fetchLink = baseUrl + midLink + callApiKey;
+
+console.log(fetchLink);
+
+fetch(fetchLink)
+.then((res) => res.json())
+.then((plists) => {
+    console.log(plists.playlists[2].name);
+})
+.catch((err) => {
+    console.log('Error in API call', err);
+});
+
+*/
+
+/* Blurring the background and playlist pop up*/
+
+
+<img
+            class="card_image"
+            src=${albumImg} onerror="this.onerror=null; this.src='/img/ac3.jpg';" 
+            alt="album cover pic"
+          />
+
+
+Taylor Swift , art.10482910
+Beyoncé , art.42919
+The Weeknd , art.51742775
+SZA , art.69410617
+Rihanna , art.7375005
+Zach Bryan , art.329001177
+Joji , art.283169213
+Imagine Dragons , art.41226138
+David Guetta , art.5015428
+Lady Gaga , art.20067373
+Jvke , art.302017422
+Metro Boomin , art.116219918
+Nicki Minaj , art.32558379
+Harry Styles , art.146985808
+OneRepublic , art.9557788
+Lil Nas X , art.317800381
+Adele , art.20554979
+Elton John , art.3231
+Kacey Musgraves , art.55080214
+Rosa Linn , art.604170821
+
+70x70
+170x170
+200x200
+300x300
+500x500
