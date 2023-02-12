@@ -1,5 +1,5 @@
 :root {
-    --primaryColor: #3a7fd8;
+    --primaryColor: #05fad9;
     /* --primaryColor: #ff0000; */
     --secondaryColor: #ffffff;
     --bgColor: #000000;
@@ -97,7 +97,7 @@ nav {
 
 .search_bar {
     width: 20vw;
-    background-color: var(--secondaryColor);
+    background-color: rgba(173, 173, 173, 0.529);
     height: 6vh;
     /* padding: 0 20px 0 0; */
     border-radius: 3vh;
@@ -113,8 +113,11 @@ nav {
 .search_bar:hover {
     width: 25vw;
     transition: 0.5s;
+    /* background-color: var(--secondaryColor); */
+    transition: 0.5s;
+    animation-name: hue-rotate-color-search-bar;
+    animation-duration: 5s;
 }
-
 .fa-magnifying-glass {
     /* width: 1px; */
     /* margin-top: 3px; */
@@ -126,7 +129,7 @@ nav {
 
 #search_song {
     margin-left: 0;
-    color: var(--primaryColor);
+    color: white;
     border-style: none;
     outline: none;
     width: 22vw;
@@ -139,6 +142,8 @@ nav {
     padding-right: 30px;
     font-size: 1rem;
     vertical-align: middle;
+    color: white;
+    transition: 0.1s;
     /* margin-right: 28px; */
 }
 
@@ -183,7 +188,8 @@ nav {
 }
 
 .rotate {
-    animation: rotation 8s infinite linear;
+    /* border: 2px solid black; */
+    animation: rotation 8s infinite linear, hue-rotate-color-album-image 2s infinite;
   }
 
   @keyframes rotation {
@@ -467,6 +473,9 @@ nav {
     font-size: 1.5rem;
     margin-bottom: 5px;
     color: var(--secondaryColor);
+    text-decoration:underline;
+    text-decoration-color: var(--primaryColor);
+    text-decoration-thickness: 1.5px;
 }
 
 #artists-container, #albums-container, #tracks-container{
@@ -525,7 +534,7 @@ nav {
     /* transition: 0.2s; */
 }
 #artist_count:hover, #album_count:hover, .track_count:hover {
-    scale: 0.95;
+    scale: 0.9;
 }
 
 #artist-name, #album-name, #track-name {
@@ -717,7 +726,7 @@ color:white;
 }
 
 
-.pl_items {
+.pl_items, .searchlist_item {
     position: relative;
     /* display: flex; */
     /* justify-content: center; */
@@ -727,12 +736,15 @@ color:white;
 
     /* border: 1px solid var(--primaryColor); */
 }
-#plSongInfo {
+#plSongInfo, #searchSongInfo {
     display: flex;
     /* flex-direction: column; */
     /* justify-content: center; */
     align-items: center;
     gap: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .pl_items:hover {
     opacity: 0.8;
@@ -746,13 +758,14 @@ color:white;
     /* transition: 0.5s; */
 }
 
-#pl_album_image {
+#pl_album_image, #search_album_image {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
 
-#plHead {
+#plHead, #searchHead{
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -760,8 +773,7 @@ color:white;
     font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;    
-    width: 60%;
+    text-overflow: ellipsis;
 }
 #plHead div{
     opacity: 0.7;
@@ -787,10 +799,101 @@ color:white;
     color: #ff0000;
 }
 
+/* search section */
+#searchList {
+    width: 800px;
+    height: 70vh;
+    position: fixed;
+    /* top: 10%; */
+    top: -65%;
+    /* align-self: center; */
+    left: 15%;
+    z-index: 7;
+    background: var(--navColor);
+    border: 0.5px solid var(--primaryColor);
+    border-radius: 5px;
+    box-shadow: -5px 5px 20px var(--primaryColor);
+    padding: 2px 10px 10px 10px;
+    /* display: flex; */
+}
+.searchList_animation_open {
+    transition: 0.8s;
+    transform: translateY(107.2%);
+}
+.searchList_animation_close {
+    transition: 0.8s;
+    transform: translateY(0);
+}
 
-/* for playlist bg blur js script*/
+#search_title, .section_title {
+    /* position: absolute; */
+    width: 100%;
+    text-align: center;
+    color: var(--body_font_color);
+    font-size: 1.5rem;
+    /* background: #ff0000; */
+    padding-top: 5px;
+    vertical-align: middle;
+}
+#search_item_container {
+    display: flex;
+    justify-content: center;
+    /* width: 20%; */
+}
+.artist_search_section, .album_search_section, .tracks_search_section {
+    width: 250px;
+    height: 58vh;
+    margin: 8px;
+    border: 2px solid var(--secondaryColor);
+}
+/* #searchSongInfo {
+    width: 80%;
+    height: 58vh;
+    margin: 8px;
+    border: 2px solid var(--secondaryColor);
+} */
+.section_title {
+    font-size: 1.1rem;
+    text-decoration: underline;
+    border: 1px solid var(--secondaryColor);
+}
+.search_list_items_container {
+    display: flex;
+    flex-direction: column;
+    /* width: 80%; */
+    margin-top: 5px;
+    /* background: #00ff00; */
+    height: 90%;
+    gap: 10px;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: scroll;
+}
+.search_list_items_container::-webkit-scrollbar {
+    display: none;
+}
+#searchHead{
+    width: 80%;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* background: #ff0000; */
+}
+#searchHead div{
+    opacity: 0.7;
+}
 
-.playlist_blur_bg {
+.searchlist_item {
+    list-style: none;
+}
+.searchlist_item:hover {
+    scale: 0.9;
+    /* opacity: 0.7; */
+    color: var(--primaryColor)
+}
+/* for playlist and search bg blur js script*/
+
+.blur_bg {
     filter: blur(8px);
     transition: 0.5s;
     /* background: var(--secondaryColor); */
@@ -820,6 +923,21 @@ color:white;
     100% {box-shadow: 0px 0px 15px hsl(214, 77%, 54%);}
 }
 
+@keyframes hue-rotate-color-search-bar {
+    0% {box-shadow: 0px 0px 15px hsl(214, 77%, 54%);}
+    25% {box-shadow: 0px 0px 15px hsl(304, 77%, 54%);}
+    50% {box-shadow: 0px 0px 15px hsl(34, 77%, 54%);}
+    75% {box-shadow: 0px 0px 15px hsl(124, 77%, 54%);}
+    100% {box-shadow: 0px 0px 15px hsl(214, 77%, 54%);}
+}
+
+@keyframes hue-rotate-color-album-image {
+    0% {box-shadow: 0px 0px 30px hsl(214, 77%, 54%);}
+    25% {box-shadow: 0px 0px 10px hsl(304, 77%, 54%);}
+    50% {box-shadow: 0px 0px 15px hsl(34, 77%, 54%);}
+    75% {box-shadow: 0px 0px 20px hsl(124, 77%, 54%);}
+    100% {box-shadow: 0px 0px 10px hsl(214, 77%, 54%);}
+}
 @keyframes playColor {
     0% {color: hsl(214, 77%, 54%);}
     25% {color: hsl(304, 77%, 54%);}
@@ -839,4 +957,17 @@ color:white;
     /* 50% {color: hsl(34, 77%, 54%);}
     75% {color: hsl(124, 77%, 54%);}
     100% {color: hsl(214, 77%, 54%);} */
+}
+
+
+.highlight {
+    animation-name: highlight;
+    animation-duration: 0.5s;
+    /* animation-delay: 2s; */
+}
+
+@keyframes highlight {
+    0% {scale: 1;}
+    50% {scale: 1.05;}
+    100% {scale: 1;}
 }

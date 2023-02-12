@@ -53,8 +53,9 @@
 // selectors
 const navBar = document.querySelector('.nav');
 const midBody = document.querySelector('.mid_section');
-const playListSection = document.querySelector('#inactive_section');
+const bgBlur = document.querySelector('#inactive_section');
 const playList = document.querySelector('#playlist');  // getElementById not working̥̥
+const searchList = document.querySelector('#searchList');  // getElementById not working̥̥
 const playerAlbumCover = document.querySelector('#album_cover');
 const playerSongName = document.querySelector('#song_name');
 const playerSubTitle = document.querySelector('#sub_title');
@@ -78,13 +79,14 @@ const tracksContainer = document.querySelector('#tracks-container');
 const albumTitleName = document.querySelector('#album_title_name');
 const trackTitleName = document.querySelector('#track_title_name');
 
+const albumSection = document.querySelector(".album_section");
+const trackSection = document.querySelector(".tracks_section");
 
-const taylorPlayList = document.querySelector(".taylor");
-const rihannaPlayList = document.querySelector(".rihanna");
-const ladyGagaPlayList = document.querySelector(".lady_gaga");
-const oneRepublicPlayList = document.querySelector(".one_republic");
-const adelePlayList = document.querySelector(".adele");
+const artistsSearchContainer = document.querySelector('#artUOderedList');
+const albumsSearchContainer = document.querySelector('#albUOderedList');
+const tracksSearchContainer = document.querySelector('#traUOderedList');
 
+const searchMusic = document.querySelector("#search_song");
 // variables
 const baseUrl= "https://api.napster.com/v2.2";
 const callApiKey = "apikey=YWNkZDJkZjktN2Y0ZS00MTExLWI2MzAtNmE4ZDZlODI3MWRk";
@@ -101,22 +103,32 @@ function fetchLink(midLink) {
 
 // 1. Playlist open close on UI - start
 function openPlayList() {
-    navBar.classList.add("playlist_blur_bg");
-    midBody.classList.add("playlist_blur_bg");
-    playListSection.style.display='initial';
+    navBar.classList.add("blur_bg");
+    midBody.classList.add("blur_bg");
+    bgBlur.style.display='initial';
     playList.classList.remove("playlist_animation_close");
     playList.classList.add("playlist_animation_open");
 }
 
+// 1.1 searchlist open close on UI - start
+function openSearchList() {
+    // navBar.classList.add("blur_bg");
+    midBody.classList.add("blur_bg");
+    bgBlur.style.display='initial';
+    searchList.classList.remove("searchList_animation_close");
+    searchList.classList.add("searchList_animation_open");
+}
+
 function backToMain() {
-    navBar.classList.remove("playlist_blur_bg");
-    midBody.classList.remove("playlist_blur_bg");
-    playListSection.style.display='none';
+    navBar.classList.remove("blur_bg");
+    midBody.classList.remove("blur_bg");
+    bgBlur.style.display='none';
     playList.classList.add("playlist_animation_close");
     playList.classList.remove("playlist_animation_open");
+    searchList.classList.add("searchList_animation_close");
+    searchList.classList.remove("searchList_animation_open");
 }
 // 1. Playlist open close on UI - end
-
 
 // 2. bringing songs to cards / songArray creation- start
 // top artists
@@ -135,7 +147,7 @@ async function getArtists(){
 
         // create elements
         newElement += (`<div id="artist_count" onclick="getArtistAlbumTracks(this)" data-artistId="${artistId}" data-artistName="${artistName}" data-type="artist">
-        <img class="artist_image" src="${artistImage}" onerror="this.src='./img/artist-default.png';this.onerror='';" />
+        <img draggable="false" class="artist_image" src="${artistImage}" onerror="this.src='./img/artist-default.png';this.onerror='';" />
         <h2 id="artist-name">${artistName}</h2>
       </div>`);
     });
@@ -167,12 +179,13 @@ async function getAlbums(e=""){
 
         // create elements
         newElement += (`<div id="album_count" onclick="getAlbumTracks(this)" data-albumId="${albumId}" data-albumName="${albumName}" data-type="album">
-        <img class="album_image" src="${albumImage}" onerror="this.src='./img/album-default.png';this.onerror='';" />
+        <img draggable="false" class="album_image" src="${albumImage}" onerror="this.src='./img/album-default.png';this.onerror='';" />
         <h2 id="album-name">${albumName}</h2>
       </div>`);
     });
     albumsContainer.innerHTML = newElement;
     albumTitleName.innerHTML = albumTitle;
+    highlightAlbums();
 }
 getAlbums();
 
@@ -211,8 +224,8 @@ async function getTracksgeneral(){
         });
 
         // create elements
-        newTrackElement += (`<div class="track_count" onclick="getId(this)" id="${trackId}">
-        <img class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
+        newTrackElement += (`<div class="track_count" onclick="getId(this)" ondblclick="add_remove_playlist()" id="${trackId}">
+        <img draggable="false" class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
         <h2 id="track-name">${trackName}</h2>
       </div>`);
     });
@@ -235,8 +248,8 @@ async function getTracksgeneral(){
         });
 
         // create elements
-        newTrackElement += (`<div class="track_count" onclick="getId(this)" id="${trackId}">
-        <img class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
+        newTrackElement += (`<div class="track_count" onclick="getId(this)" ondblclick="add_remove_playlist()" id="${trackId}">
+        <img draggable="false" class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
         <h2 id="track-name">${trackName}</h2>
       </div>`);
     });
@@ -281,25 +294,29 @@ async function getTracks(e){
         });
 
         // create elements
-        newTrackElement += (`<div class="track_count" onclick="getId(this)" id="${trackId}">
-        <img class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
+        newTrackElement += (`<div class="track_count" onclick="getId(this)" ondblclick="add_remove_playlist()" id="${trackId}">
+        <img draggable="false" class="track_image" src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';" />
         <h2 id="track-name">${trackName}</h2>
       </div>`);
     });
     tracksContainer.innerHTML = newTrackElement;
     trackTitleName.innerHTML = trackTitle;
+    highlightTracks();
 }
 
 // selecting an artist
 function getArtistAlbumTracks(e) {
     getAlbums(e);
     getTracks(e);
+    backToMain();
 }
 function getAlbumTracks(e) {
     getTracks(e);
+    backToMain();
 }
-
+console.log("Songs Array");
 console.log(songsArray);
+console.log("Songs Array  🔚");
 // 2. bringing songs to cards / songArray creation - end
 
 // 3. selecting the song - start
@@ -468,7 +485,7 @@ function generatePlayList() {
         const value = JSON.parse(localStorage.getItem(key));
         newPlElement += (`<li class="pl_items">
         <div id="plSongInfo" onclick="playListItem(this)" data-songid="${value.id}" data-songurl="${value.audioURL}" data-albImg="${value.albumImg}" data-sngName="${value.songName}" data-artName="${value.artistName}">
-            <img id="pl_album_image" src="${value.albumImg}" alt="album image" />
+            <img draggable="false" id="pl_album_image" src="${value.albumImg}" onerror="this.src='./img/album-default.png';this.onerror='';"alt="album image" />
             <h5 id="plHead">
             ${value.songName}
             <div>${value.artistName}</div>
@@ -531,4 +548,157 @@ function albLeftArrow() {
 }
 function albRightArrow() {
     document.querySelector(`#albums-container`).scrollLeft += 500;
+}
+
+// 6.2 highlight functions
+function highlightAlbums() {
+    albumSection.classList.add("highlight");
+    setInterval(()=>{
+        albumSection.classList.remove("highlight");
+    },2000);
+}
+function highlightTracks() {
+    trackSection.classList.add("highlight");
+    setInterval(()=>{
+        trackSection.classList.remove("highlight");
+    },2000);
+}
+
+// 6.3 Search music
+// let keyWord = searchMusic.value;
+
+let keyWord; // = "weezer";
+let timeout;
+function onKeyUpHandler() {
+    keyWord = searchMusic.value;
+    if (keyWord === "") { return; }
+    clearTimeout(timeout);
+    timeout = setTimeout(async () =>{
+        const searchInMusicAPI = await fetch(fetchLink(`/search?query=${keyWord}&pert_type_mimit=3&`));
+        const searchInMusicArray = await searchInMusicAPI.json();
+        const searchArtistArray = searchInMusicArray.search.data.artists;
+        const searchAlbumArray = searchInMusicArray.search.data.albums;
+        const searchTrackArray = searchInMusicArray.search.data.tracks;
+        // console.log(`Keyword is:${keyWord}`);
+        // console.log(searchArtistArray);
+        // console.log(searchAlbumArray);
+        // console.log(searchTrackArray);
+        getSearchArtists(searchArtistArray);
+        getSearchAlbums(searchAlbumArray);
+        getSearchTracks(searchTrackArray);
+
+    },1000);
+}
+
+searchMusic.addEventListener('keyup', onKeyUpHandler);
+
+function getSearchArtists(artistArray) {
+    let newElement = "";
+    artistArray.forEach(artist => {
+        let artistId = artist.id;
+        let artistName = artist.name;        ;
+        let artistImage = `https://api.napster.com/imageserver/v2/artists/${artistId}/images/170x170.jpg`;
+
+        // create elements
+        newElement += (`<li class="searchlist_item" onclick="getArtistAlbumTracks(this)" data-artistId="${artistId}" data-artistName="${artistName}" data-type="artist">
+            <div id="searchSongInfo">
+                <img
+                draggable="false"
+                id="search_album_image"
+                src="${artistImage}"
+                onerror="this.src='./img/artist-default.png';this.onerror='';"
+                alt="image"
+                />
+                <h5 id="searchHead">${artistName}
+                <div> </div>
+                </h5>
+            </div>
+            </li>`);
+    });
+    artistsSearchContainer.innerHTML = newElement;
+}
+
+function getSearchAlbums(albumArray) {
+    let newElement = "";
+    albumArray.forEach(album => {
+        let albumId = album.id;
+        let albumName = album.name;        ;
+        let albumImage = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`;
+        let artistName = album.artistName;
+
+        // create elements
+        newElement += (`<li class="searchlist_item" onclick="getAlbumTracks(this)" data-albumId="${albumId}" data-albumName="${albumName}" data-type="album">
+                <div id="searchSongInfo" >
+                  <img draggable="false"
+                    id="search_album_image"
+                    src="${albumImage}"
+                    onerror="this.src='./img/album-default.png';this.onerror='';"
+                    alt="image" />
+                  <h5 id="searchHead">${albumName}
+                    <div>${artistName}</div>
+                  </h5>
+                </div>
+              </li>`);
+    });
+    albumsSearchContainer.innerHTML = newElement;
+    highlightAlbums();
+}
+
+function getSearchTracks(trackArray) {
+    let newTrackElement = "";
+    trackArray.forEach(track => {
+        let trackId = track.id;
+        let trackName = track.name;
+        let artistName = track.artistName;
+        let audioURL = track.previewURL;
+        let albumId = track.albumId;
+        let trackImage = `https://api.napster.com/imageserver/v2/albums/${albumId}/images/170x170.jpg`;
+
+        // create songArray
+        songsArray.push({
+            id: trackId,
+            songName: trackName,
+            artistName: artistName,
+            audioURL: audioURL,
+            albumImg: trackImage
+        });
+
+        // create elements
+        newTrackElement += (`<li class="searchlist_item" onclick="playMe(this)" ondblclick="add_remove_playlist()" id="${trackId}" 
+        data-trackId = "trackId" 
+data-trackName = "${trackName}"
+data-artistName = "${artistName}"
+data-audioURL = "${audioURL}"
+data-albumId = "${albumId}"
+data-trackImage = "${trackImage}" >
+                <div id="searchSongInfo">
+                  <img draggable="false"
+                    id="search_album_image"
+                    src="${trackImage}" onerror="this.src='./img/track-default.jpg';this.onerror='';"
+                    alt="image" />
+                  <h5 id="searchHead">${trackName}
+                    <div>${artistName}</div>
+                  </h5>
+                </div>
+              </li>`);
+    });
+    tracksSearchContainer.innerHTML = newTrackElement;
+    highlightTracks();
+}
+
+function playMe(e) {
+    play_pause();
+    currSongId = e.id;
+
+    //3.2 updating player left section
+    playerAlbumCover.src = e.getAttribute("data-trackImage");
+    playerSongName.innerText = e.getAttribute("data-trackName");
+    playerSubTitle.innerText = e.getAttribute("data-artistName");
+
+    //3.3 updating the music variables
+    currSong = e.getAttribute("data-audioURL");
+    music.src = currSong;
+    //3.4 playing the song
+    play_pause();
+    playListIconUpdate();
 }
