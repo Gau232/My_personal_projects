@@ -354,13 +354,15 @@ function getId(e) {
 
 // 4. player controls - start
 // 4.1 playing the selected song 
+let x = window.matchMedia("(min-height: 560px)")
 function play_pause() {
     if (music.paused) {
         music.play();
         playButton.classList.remove('fa-play');
         playButton.classList.add('fa-pause');
         playerAlbumCover.classList.add('rotate');
-        playerAlbumCover.style.height='180%';
+        playerAlbumCover.style.height='150%';
+        if (x.matches) { playerAlbumCover.style.height='100%'; }
 
     }
     else {
@@ -369,6 +371,7 @@ function play_pause() {
         playButton.classList.add('fa-play');
         playerAlbumCover.classList.remove('rotate');
         playerAlbumCover.style.height='100%';
+        if (x.matches) { playerAlbumCover.style.height='60%'; }
     }
 }
 
@@ -580,14 +583,14 @@ function onKeyUpHandler() {
         const searchAlbumArray = searchInMusicArray.search.data.albums;
         const searchTrackArray = searchInMusicArray.search.data.tracks;
         // console.log(`Keyword is:${keyWord}`);
-        // console.log(searchArtistArray);
-        // console.log(searchAlbumArray);
-        // console.log(searchTrackArray);
+        console.log(searchArtistArray);
+        console.log(searchAlbumArray);
+        console.log(searchTrackArray);
         getSearchArtists(searchArtistArray);
         getSearchAlbums(searchAlbumArray);
         getSearchTracks(searchTrackArray);
 
-    },1000);
+    },400);
 }
 
 searchMusic.addEventListener('keyup', onKeyUpHandler);
@@ -665,12 +668,7 @@ function getSearchTracks(trackArray) {
 
         // create elements
         newTrackElement += (`<li class="searchlist_item" onclick="playMe(this)" ondblclick="add_remove_playlist()" id="${trackId}" 
-        data-trackId = "trackId" 
-data-trackName = "${trackName}"
-data-artistName = "${artistName}"
-data-audioURL = "${audioURL}"
-data-albumId = "${albumId}"
-data-trackImage = "${trackImage}" >
+        data-trackId = "trackId" data-trackName = "${trackName}" data-artistName = "${artistName}" data-audioURL = "${audioURL}" data-albumId = "${albumId}" data-trackImage = "${trackImage}" >
                 <div id="searchSongInfo">
                   <img draggable="false"
                     id="search_album_image"
